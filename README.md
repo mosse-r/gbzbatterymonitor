@@ -53,6 +53,10 @@ Type:
 ```
 sudo apt-get install python-gpiozero
 ```
+Type:
+```
+sudo apt-get install python-serial
+```
 Then we need to clone pngview from github with:
 ```
 sudo git clone https://github.com/AndrewFromMelbourne/raspidmx.git
