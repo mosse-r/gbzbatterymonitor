@@ -47,6 +47,10 @@ sudo reboot
 And the longer way if you want to do it manually step by step.
 Go to raspberry command prompt or SSH.  Make sure you are in the home directory and type:
 ```
+cd ~
+```
+Type:
+```
 sudo apt-get install libpng12-dev
 ```
 Type:
@@ -57,33 +61,17 @@ Type:
 ```
 sudo apt-get install python-serial
 ```
-Then we need to clone pngview from github with:
-```
-sudo git clone https://github.com/AndrewFromMelbourne/raspidmx.git
-```
-Change directory to:
-```
-cd raspidmx
-```
-Type:
-```
-sudo make
-```
-Go back to home directory:
-```
-cd ~
-```
 Clone and install my github and scripts:
 ```
 sudo git clone https://github.com/HoolyHoo/gbzbatterymonitor.git
 ```
-Change directory:
+Change file permission:
 ```
-cd gbzbatterymonitor
+sudo chmod 755 /home/pi/gbzbatterymonitor/HHMonitorStart.sh
 ```
 Change file permission:
 ```
-sudo chmod 755 HHMonitorStart.sh
+sudo chmod 755 /home/pi/gbzbatterymonitor/Pngview/pngview
 ```
 Install in rc.local to start scripts on startup:
 ```
