@@ -26,7 +26,7 @@ You can do this part in one of two ways, Automated or Manual.  You decide.
 #### Automated Software Install
 
 Go to raspberry command prompt or SSH.
-Make sure you are in the home directory by typing ```cd ~ ```and then type:
+Make sure you are in the home directory by typing ```cd ~ ``` and then type:
 ```
 wget https://raw.githubusercontent.com/HoolyHoo/gbzbatterymonitor/master/Install.sh
 ```
