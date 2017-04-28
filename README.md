@@ -21,6 +21,30 @@ http://www.sudomod.com/forum/viewtopic.php?f=25&t=1228
 
 ### Software Install
 
+You can do this part in one of two ways, Automated or Manual.  You decide.
+
+#### Automated Software Install
+
+Go to raspberry command prompt or SSH.
+Make sure you are in the home directory by typing ```cd ~ ```and then type:
+```
+wget https://raw.githubusercontent.com/HoolyHoo/gbzbatterymonitor/master/Install.sh
+```
+Then type:
+```
+sudo chmod 755 Install.sh
+```
+And finally type:
+```
+./Install.sh
+```
+Finally reboot to have it all start on boot with:
+```
+sudo reboot
+```
+
+#### Manual Software Install
+And the longer way if you want to do it manually step by step.
 Go to raspberry command prompt or SSH.  Make sure you are in the home directory and type:
 ```
 sudo apt-get install libpng12-dev
@@ -39,7 +63,7 @@ cd raspidmx
 ```
 Type:
 ```
-make
+sudo make
 ```
 Go back to home directory:
 ```
