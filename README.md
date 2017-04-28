@@ -8,7 +8,7 @@ This battery monitoring solution is for Helder's AIO board. The script and hex s
 
 One 10K resistor and DPDT switch.  The original GB switch will work also with the Powerboost 1000C but not with the Banggood power supply.  Also one momemtary tact switch which is optional.
 ### Wiring Schematic
-![](https://github.com/HoolyHoo/gbzbatterymonitor/blob/master/Wiring/Schematic.png)
+![](https://github.com/HoolyHoo/gbzbatterymonitor/blob/master/Wiring/Schematic1.png)
 ### Hex File Install
 
 Reprogram Helder's board with new hex file.
