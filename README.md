@@ -62,6 +62,10 @@ sudo apt-get install python-gpiozero
 ```
 Type:
 ```
+sudo apt-get install python-pkg-resources python3-pkg-resources
+```
+Type:
+```
 sudo apt-get install python-serial
 ```
 Clone and install my github and scripts:
