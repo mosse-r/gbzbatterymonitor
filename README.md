@@ -16,8 +16,8 @@ One 10K resistor and DPDT switch.  The original GB switch will work also with th
 
 Reprogram Helder's board with new hex file.
 
-Grab the hex from the hex directory:
-https://github.com/HoolyHoo/gbzbatterymonitor/tree/master/Hex
+Grab the hex from the hex directory after dowloading github zip:
+https://github.com/HoolyHoo/gbzbatterymonitor
 
 Go to Helder's link for help on programming.
 http://www.sudomod.com/forum/viewtopic.php?f=25&t=1228
