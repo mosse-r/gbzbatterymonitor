@@ -1,4 +1,4 @@
-# HoolyHoo-GBZBattery-Monitor
+# HoolyHoo-GBZBattery-Monitor!
 
 This battery monitoring solution is for Helder's AIO board. The script and hex should display on screen battery monitoring with a low battery warning video and critical battery level video along with an automated shutdown that would cancel if you plug in the zero to power. Also added an option to install a extra button that will be monitored and when pressed and held, will initialize a graceful shutdown at any time so you don't have to go through emulation station menu to shutdown. A good placement is in the original GB charging hole. That button is optional however and not needed if you don't want it.  I tested this with the Adafruit Powerboost 1000c but should work also with the Banggood power supply.
 
