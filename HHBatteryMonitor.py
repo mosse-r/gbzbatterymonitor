@@ -11,6 +11,7 @@ warning = 0
 status = 0
 port = 0
 debug = 0
+iconState = ""
 PNGVIEWPATH = "/home/pi/gbzbatterymonitor/Pngview/"
 ICONPATH = "/home/pi/gbzbatterymonitor/icons"
 CLIPS = 1
@@ -24,16 +25,19 @@ VOLT0 = 3.2
 
 
 def changeicon(percent):
-    i = 0
-    killid = 0
-    os.system(PNGVIEWPATH + "/pngview -b 0 -l 3000" + percent + " -x 650 -y 10 " + ICONPATH + "/battery" + percent + ".png &")
-    out = check_output("ps aux | grep pngview | awk '{ print $2 }'", shell=True)
-    nums = out.split('\n')
-    for num in nums:
-        i += 1
-        if i == 1:
-            killid = num
-            os.system("sudo kill " + killid)
+    global iconState
+    if iconState != percent:
+        iconState = percent
+        i = 0
+        killid = 0
+        os.system(PNGVIEWPATH + "/pngview -b 0 -l 3000" + percent + " -x 650 -y 10 " + ICONPATH + "/battery" + percent + ".png &")
+        out = check_output("ps aux | grep pngview | awk '{ print $2 }'", shell=True)
+        nums = out.split('\n')
+        for num in nums:
+            i += 1
+            if i == 1:
+                killid = num
+                os.system("sudo kill " + killid)
 
 
 def endProcess(signalnum=None, handler=None):
