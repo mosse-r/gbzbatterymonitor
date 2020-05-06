@@ -10,7 +10,7 @@ from subprocess import check_output
 warning = 0
 status = 0
 port = 0
-debug = 1
+debug = 0
 iconState = ""
 PNGVIEWPATH = "/home/pi/gbzbatterymonitor/raspidmx/pngview"
 ICONPATH = "/home/pi/gbzbatterymonitor/icons"
