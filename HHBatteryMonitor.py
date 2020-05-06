@@ -10,9 +10,9 @@ from subprocess import check_output
 warning = 0
 status = 0
 port = 0
-debug = 0
+debug = 1
 iconState = ""
-PNGVIEWPATH = "/home/pi/gbzbatterymonitor/Pngview/"
+PNGVIEWPATH = "/home/pi/gbzbatterymonitor/raspidmx/pngview"
 ICONPATH = "/home/pi/gbzbatterymonitor/icons"
 CLIPS = 1
 REFRESH_RATE = 1
@@ -30,7 +30,7 @@ def changeicon(percent):
         iconState = percent
         i = 0
         killid = 0
-        os.system(PNGVIEWPATH + "/pngview -b 0 -l 3000" + percent + " -x 650 -y 10 " + ICONPATH + "/battery" + percent + ".png &")
+        os.system(PNGVIEWPATH + "/pngview -b 0 -l 3000" + percent + " -x 650 -y 0 " + ICONPATH + "/battery" + percent + ".png &")
         out = check_output("ps aux | grep pngview | awk '{ print $2 }'", shell=True)
         nums = out.split('\n')
         for num in nums:
@@ -81,7 +81,7 @@ while port == 0:
 
 # Begin Battery Monitoring
 
-os.system(PNGVIEWPATH + "/pngview -b 0 -l 299999 -x 650 -y 10 " + ICONPATH + "/blank.png &")
+os.system(PNGVIEWPATH + "/pngview -b 0 -l 299999 -x 650 -y 0 " + ICONPATH + "/blank.png &")
 
 while True:
     try:
