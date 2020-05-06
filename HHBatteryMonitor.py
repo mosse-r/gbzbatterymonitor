@@ -17,11 +17,11 @@ ICONPATH = "/home/pi/gbzbatterymonitor/icons"
 CLIPS = 1
 REFRESH_RATE = 1
 VCC = 5.1
-VOLT100 = 4.1
-VOLT75 = 3.76
-VOLT50 = 3.63
-VOLT25 = 3.5
-VOLT0 = 3.2
+VOLT100 = 4.2
+VOLT75 = 3.99
+VOLT50 = 3.79
+VOLT25 = 3.59
+VOLT0 = 3.38
 
 
 def changeicon(percent):
