@@ -31,7 +31,7 @@ You can do this part in one of two ways, Automated or Manual.  You decide.
 Go to raspberry command prompt or SSH.
 Make sure you are in the home directory by typing ```cd ~ ``` and then type:
 ```
-wget https://raw.githubusercontent.com/HoolyHoo/gbzbatterymonitor/master/Install.sh
+wget https://raw.githubusercontent.com/mosse-r/gbzbatterymonitor/master/Install.sh
 ```
 Then type:
 ```
@@ -70,15 +70,17 @@ sudo apt-get install python-serial
 ```
 Clone and install my github and scripts:
 ```
-sudo git clone https://github.com/HoolyHoo/gbzbatterymonitor.git
+sudo git clone https://github.com/mosse-r/gbzbatterymonitor.git
 ```
 Change file permission:
 ```
 sudo chmod 755 /home/pi/gbzbatterymonitor/HHMonitorStart.sh
 ```
-Change file permission:
+Install pngview
 ```
-sudo chmod 755 /home/pi/gbzbatterymonitor/Pngview/pngview
+sudo git clone https://github.com/AndrewFromMelbourne/raspidmx.git ~/gbzbatterymonitor/raspidmx
+cd /home/pi/gbzbatterymonitor/raspidmx
+sudo make -j
 ```
 Install in rc.local to start scripts on startup:
 ```
