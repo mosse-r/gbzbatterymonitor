@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 
-python /home/pi/gbzbatterymonitor/HHBatteryMonitor.py &
-python /home/pi/gbzbatterymonitor/HHShutdown.py &
+python /home/pi/Mintybatterymonitor/MintyCombo.py &
+sleep 20
+python /home/pi/gbzbatterymonitor/HHBatteryMonitor.py &-
