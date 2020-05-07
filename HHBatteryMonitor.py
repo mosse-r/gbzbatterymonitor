@@ -12,6 +12,7 @@ status = 0
 port = 0
 debug = 0
 iconState = ""
+toggleFile = "/home/pi/gbzbatterymonitor/Toggle.txt"
 PNGVIEWPATH = "/home/pi/gbzbatterymonitor/raspidmx/pngview"
 ICONPATH = "/home/pi/gbzbatterymonitor/icons"
 CLIPS = 1
@@ -83,6 +84,15 @@ while port == 0:
 
 os.system(PNGVIEWPATH + "/pngview -b 0 -l 299999 -x 650 -y 0 " + ICONPATH + "/blank.png &")
 
+try:
+    with open(toggleFile, 'r') as f:
+        output = f.read()
+except IOError:
+    with open(toggleFile, 'w') as f:
+        f.write('1')
+    output = '1'
+state = int(output)
+
 while True:
     try:
         ret1 = convertVoltage()
@@ -113,15 +123,15 @@ while True:
                     warning = 1
             status = 25
         elif ret < VOLT50:
-            if status != 50:
+            if status != 50 and state == 1:
                 changeicon("50")
             status = 50
         elif ret < VOLT75:
-            if status != 75:
+            if status != 75 and state == 1:
                 changeicon("75")
             status = 75
         else:
-            if status != 100:
+            if status != 100 and state == 1:
                 changeicon("100")
             status = 100
 
