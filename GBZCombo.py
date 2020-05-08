@@ -118,13 +118,13 @@ def toggleState():
 def showVolumeIcon():
     global volume
     killPngview()
-    while volumeUpBtn.is_pressed or volumeDownBtn.is_pressed:
-        if volumeUpBtn.is_pressed:
+    if volumeUpBtn.is_pressed() or volumeDownBtn.is_pressed():
+        if volumeUpBtn.is_pressed() :
             os.system(pngviewPath + "/pngview2 -b 0 -l 999999 " + iconPath + "/Volume" + str(volume) + ".png &")
             volume = min(100, volume + 10)
             os.system("amixer sset -q 'PCM' " + str(volume) + "%")
             killPngview()
-        elif volumeDownBtn.is_pressed:
+        elif volumeDownBtn.is_pressed() :
             os.system(pngviewPath + "/pngview2 -b 0 -l 999999 " + iconPath + "/Volume" + str(volume) + ".png &")
             volume = max(0, volume - 10)
             os.system("amixer sset -q 'PCM' " + str(volume) + "%")
