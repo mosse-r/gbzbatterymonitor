@@ -16,7 +16,7 @@ sudo make -j
 sudo mkdir /home/pi/gbzbatterymonitor/bin
 sudo cp /home/pi/gbzbatterymonitor/raspidmx/pngview/pngview /home/pi/gbzbatterymonitor/bin/pngview
 sudo cp /home/pi/gbzbatterymonitor/raspidmx/pngview/pngview /home/pi/gbzbatterymonitor/bin/pngview-transient
-sudo rm /home/pi/gbzbatterymonitor/raspidmx
+sudo rm -rf /home/pi/gbzbatterymonitor/raspidmx
 
 # Startup
 if grep -Fxq "/home/pi/gbzbatterymonitor/HHMonitorStart.sh &"  /etc/rc.local
