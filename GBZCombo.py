@@ -58,13 +58,13 @@ def wifiToggle():
     global wifiStatus
     if wifiStatus == 0:
         os.system("sudo rfkill block wifi")
-        os.system(pngviewPath + "/pngview2 -b 0 -l 999999 " + iconPath + "/wifiOff.png &")
+        os.system(pngviewPath + "/pngview -b 0 -l 999999 " + iconPath + "/wifiOff.png &")
         time.sleep(3)
         killPngview()
         wifiStatus = 1
     else:
         os.system("sudo rfkill unblock wifi")
-        os.system(pngviewPath + "/pngview2 -b 0 -l 999999 " + iconPath + "/wifiOn.png &")
+        os.system(pngviewPath + "/pngview -b 0 -l 999999 " + iconPath + "/wifiOn.png &")
         time.sleep(3)
         killPngview()
         wifiStatus = 0
@@ -74,13 +74,13 @@ def bluetoothToggle():
     global bluetoothStatus
     if bluetoothStatus == 0:
         os.system("sudo rfkill block bluetooth")
-        os.system(pngviewPath + "/pngview2 -b 0 -l 999999 " + iconPath + "/bluetoothOff.png &")
+        os.system(pngviewPath + "/pngview -b 0 -l 999999 " + iconPath + "/bluetoothOff.png &")
         time.sleep(3)
         killPngview()
         bluetoothStatus = 1
     else:
         os.system("sudo rfkill unblock bluetooth")
-        os.system(pngviewPath + "/pngview2 -b 0 -l 999999 " + iconPath + "/bluetoothOn.png &")
+        os.system(pngviewPath + "/pngview -b 0 -l 999999 " + iconPath + "/bluetoothOn.png &")
         time.sleep(3)
         killPngview()
         bluetoothStatus = 0
@@ -88,7 +88,7 @@ def bluetoothToggle():
 
 def shutdown():
     for i in range(0, 3):
-        os.system(pngviewPath + "/pngview2 -b 0 -l 999999 " + iconPath + "/shutdown.png &")
+        os.system(pngviewPath + "/pngview -b 0 -l 999999 " + iconPath + "/shutdown.png &")
         time.sleep(1)
         killPngview()
         time.sleep(.5)
@@ -119,31 +119,31 @@ def showVolumeIcon():
     global volume
     killPngview()
     if volumeUpBtn.is_pressed() or volumeDownBtn.is_pressed():
-        if volumeUpBtn.is_pressed() :
-            os.system(pngviewPath + "/pngview2 -b 0 -l 999999 " + iconPath + "/Volume" + str(volume) + ".png &")
+        if volumeUpBtn.is_pressed():
+            os.system(pngviewPath + "/pngview -b 0 -l 999999 " + iconPath + "/Volume" + str(volume) + ".png &")
             volume = min(100, volume + 10)
             os.system("amixer sset -q 'PCM' " + str(volume) + "%")
             killPngview()
-        elif volumeDownBtn.is_pressed() :
-            os.system(pngviewPath + "/pngview2 -b 0 -l 999999 " + iconPath + "/Volume" + str(volume) + ".png &")
+        elif volumeDownBtn.is_pressed():
+            os.system(pngviewPath + "/pngview -b 0 -l 999999 " + iconPath + "/Volume" + str(volume) + ".png &")
             volume = max(0, volume - 10)
             os.system("amixer sset -q 'PCM' " + str(volume) + "%")
             killPngview()
     else:
         os.system("amixer sset -q 'PCM' " + str(volume) + "%")
-        os.system(pngviewPath + "/pngview2 -b 0 -l 999999 " + iconPath + "/Volume" + str(volume) + ".png &")
+        os.system(pngviewPath + "/pngview -b 0 -l 999999 " + iconPath + "/Volume" + str(volume) + ".png &")
         time.sleep(2)
         killPngview()
 
 
 def showCheat():
-    os.system(pngviewPath + "/pngview2 -b 0 -l 999999 " + iconPath + "/cheat.png &")
+    os.system(pngviewPath + "/pngview -b 0 -l 999999 " + iconPath + "/cheat.png &")
     time.sleep(5)
     killPngview()
 
 
 def killPngview():
-    os.system("sudo killall -q -15 pngview2")
+    os.system("sudo killall -q -15 pngview")
 
 
 def initSetup():
