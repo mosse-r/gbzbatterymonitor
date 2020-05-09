@@ -15,7 +15,9 @@ cd /home/pi/gbzbatterymonitor/raspidmx
 sudo make -j
 sudo mkdir /home/pi/gbzbatterymonitor/bin
 sudo cp /home/pi/gbzbatterymonitor/raspidmx/pngview/pngview /home/pi/gbzbatterymonitor/bin/pngview
-sudo cp /home/pi/gbzbatterymonitor/raspidmx/pngview/pngview /home/pi/gbzbatterymonitor/bin/pngview-transient
+sudo ln -s /home/pi/gbzbatterymonitor/bin/pngview /home/pi/gbzbatterymonitor/bin/pngview-transient
+sudo ln -s /home/pi/gbzbatterymonitor/bin/pngview /home/pi/gbzbatterymonitor/bin/pngview-bluetooth
+sudo ln -s /home/pi/gbzbatterymonitor/bin/pngview /home/pi/gbzbatterymonitor/bin/pngview-wifi
 sudo rm -rf /home/pi/gbzbatterymonitor/raspidmx
 
 # Startup

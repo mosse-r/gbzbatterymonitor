@@ -2,4 +2,4 @@
 
 python /home/pi/gbzbatterymonitor/GBZCombo.py &
 sleep 20
-python /home/pi/gbzbatterymonitor/HHBatteryMonitor.py &-
+python /home/pi/gbzbatterymonitor/HHBatteryMonitor.py &

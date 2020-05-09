@@ -36,7 +36,7 @@ wifiStatus = 1
 bluetoothStatus = 1
 toggleFile = "/home/pi/gbzbatterymonitor/Toggle.txt"
 batteryMonitorPath = "/home/pi/gbzbatterymonitor/HHBatteryMonitor.py"
-pngviewBinary = "/home/pi/gbzbatterymonitor/bin/pngview-transient"
+pngviewBaseBinary = "/home/pi/gbzbatterymonitor/bin/pngview"
 iconPath = "/home/pi/gbzbatterymonitor/icons"
 state = 1
 
@@ -57,38 +57,38 @@ def volumeUp():
 
 def wifiToggle():
     global wifiStatus
-    killPngview()
+    global state
     if wifiStatus == 0:
         os.system("sudo rfkill block wifi")
-        os.system(pngviewBinary + " -b 0 -l 999999 -t 2000 " + iconPath + "/wifiOff.png &")
+        killPngview("pngview-wifi")
         wifiStatus = 1
     else:
         os.system("sudo rfkill unblock wifi")
-        os.system(pngviewBinary + " -b 0 -l 999999 -t 2000 " + iconPath + "/wifiOn.png &")
+        os.system("{pngviewBinary}-wifi -b 0 -l 299999 -x 600 -y 0 {iconPath}/wifi-notification.png &".format(
+            pngviewBinary=pngviewBaseBinary, delay=2000, iconPath=iconPath)
+        )
         wifiStatus = 0
 
 
 def bluetoothToggle():
     global bluetoothStatus
+    global state
     delay = 2000
-    killPngview()
     if bluetoothStatus == 0:
         os.system("sudo rfkill block bluetooth")
-        os.system("{pngviewBinary} -b 0 -l 999999 -t {delay} {iconPath}/bluetoothOff.png &".format(
-            pngviewBinary=pngviewBinary, delay=delay, iconPath=iconPath)
-        )
+        killPngview("pngview-bluetooth")
         bluetoothStatus = 1
     else:
         os.system("sudo rfkill unblock bluetooth")
-        os.system("{pngviewBinary} -b 0 -l 999999 -t {delay} {iconPath}/bluetoothOn.png &".format(
-            pngviewBinary=pngviewBinary, delay=delay, iconPath=iconPath)
-        )
+    	os.system("{pngviewBinary}-bluetooth -b 0 -l 299999 -x 635 -y 0 {iconPath}/bluetooth-notification.png &".format(
+		pngviewBinary=pngviewBaseBinary, delay=delay, iconPath=iconPath)
+    	)
         bluetoothStatus = 0
 
 
 def shutdown():
     for i in range(0, 3):
-        os.system(pngviewBinary + " -b 0 -l 999999 " + iconPath + "/shutdown.png &")
+        os.system(pngviewBaseBinary + "-transient -b 0 -l 999999 " + iconPath + "/shutdown.png &")
         time.sleep(1)
         killPngview()
         time.sleep(.5)
@@ -118,7 +118,7 @@ def toggleState():
 def showVolumeIcon():
     global volume
     killPngview()
-    os.system(pngviewBinary + " -b 0 -l 999999 -t 1000 " + iconPath + "/Volume" + str(volume) + ".png &")
+    os.system(pngviewBaseBinary + "-transient -b 0 -l 999999 -t 1000 " + iconPath + "/Volume" + str(volume) + ".png &")
 
     if volumeUpBtn.is_pressed():
         volume = min(100, volume + 10)
@@ -129,11 +129,11 @@ def showVolumeIcon():
 
 
 def showCheat():
-    os.system(pngviewBinary + " -b 0 -l 999999 -t 5000 " + iconPath + "/cheat.png &")
+    os.system(pngviewBaseBinary + "-transient -b 0 -l 999999 -t 5000 " + iconPath + "/cheat.png &")
 
 
-def killPngview():
-    os.system("sudo killall -q -15 pngview-transient")
+def killPngview(process_name="pngview-transient"):
+    os.system("sudo killall -q -15 {process_name}".format(process_name=process_name))
 
 
 def initSetup():
