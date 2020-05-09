@@ -36,8 +36,9 @@ wifiStatus = 1
 bluetoothStatus = 1
 toggleFile = "/home/pi/gbzbatterymonitor/Toggle.txt"
 batteryMonitorPath = "/home/pi/gbzbatterymonitor/HHBatteryMonitor.py"
-pngviewPath = "/home/pi/gbzbatterymonitor/raspidmx/pngview"
+pngviewBinary = "/home/pi/gbzbatterymonitor/bin/pngview-transient"
 iconPath = "/home/pi/gbzbatterymonitor/icons"
+state = 1
 
 
 def volumeDown():
@@ -56,39 +57,38 @@ def volumeUp():
 
 def wifiToggle():
     global wifiStatus
+    killPngview()
     if wifiStatus == 0:
         os.system("sudo rfkill block wifi")
-        os.system(pngviewPath + "/pngview -b 0 -l 999999 " + iconPath + "/wifiOff.png &")
-        time.sleep(3)
-        killPngview()
+        os.system(pngviewBinary + " -b 0 -l 999999 -t 2000 " + iconPath + "/wifiOff.png &")
         wifiStatus = 1
     else:
         os.system("sudo rfkill unblock wifi")
-        os.system(pngviewPath + "/pngview -b 0 -l 999999 " + iconPath + "/wifiOn.png &")
-        time.sleep(3)
-        killPngview()
+        os.system(pngviewBinary + " -b 0 -l 999999 -t 2000 " + iconPath + "/wifiOn.png &")
         wifiStatus = 0
 
 
 def bluetoothToggle():
     global bluetoothStatus
+    delay = 2000
+    killPngview()
     if bluetoothStatus == 0:
         os.system("sudo rfkill block bluetooth")
-        os.system(pngviewPath + "/pngview -b 0 -l 999999 " + iconPath + "/bluetoothOff.png &")
-        time.sleep(3)
-        killPngview()
+        os.system("{pngviewBinary} -b 0 -l 999999 -t {delay} {iconPath}/bluetoothOff.png &".format(
+            pngviewBinary=pngviewBinary, delay=delay, iconPath=iconPath)
+        )
         bluetoothStatus = 1
     else:
         os.system("sudo rfkill unblock bluetooth")
-        os.system(pngviewPath + "/pngview -b 0 -l 999999 " + iconPath + "/bluetoothOn.png &")
-        time.sleep(3)
-        killPngview()
+        os.system("{pngviewBinary} -b 0 -l 999999 -t {delay} {iconPath}/bluetoothOn.png &".format(
+            pngviewBinary=pngviewBinary, delay=delay, iconPath=iconPath)
+        )
         bluetoothStatus = 0
 
 
 def shutdown():
     for i in range(0, 3):
-        os.system(pngviewPath + "/pngview -b 0 -l 999999 " + iconPath + "/shutdown.png &")
+        os.system(pngviewBinary + " -b 0 -l 999999 " + iconPath + "/shutdown.png &")
         time.sleep(1)
         killPngview()
         time.sleep(.5)
@@ -118,35 +118,36 @@ def toggleState():
 def showVolumeIcon():
     global volume
     killPngview()
-    if volumeUpBtn.is_pressed() or volumeDownBtn.is_pressed():
-        if volumeUpBtn.is_pressed():
-            os.system(pngviewPath + "/pngview -b 0 -l 999999 " + iconPath + "/Volume" + str(volume) + ".png &")
-            volume = min(100, volume + 10)
-            os.system("amixer sset -q 'PCM' " + str(volume) + "%")
-            killPngview()
-        elif volumeDownBtn.is_pressed():
-            os.system(pngviewPath + "/pngview -b 0 -l 999999 " + iconPath + "/Volume" + str(volume) + ".png &")
-            volume = max(0, volume - 10)
-            os.system("amixer sset -q 'PCM' " + str(volume) + "%")
-            killPngview()
-    else:
-        os.system("amixer sset -q 'PCM' " + str(volume) + "%")
-        os.system(pngviewPath + "/pngview -b 0 -l 999999 " + iconPath + "/Volume" + str(volume) + ".png &")
-        time.sleep(2)
-        killPngview()
+    os.system(pngviewBinary + " -b 0 -l 999999 -t 1000 " + iconPath + "/Volume" + str(volume) + ".png &")
+
+    if volumeUpBtn.is_pressed():
+        volume = min(100, volume + 10)
+    elif volumeDownBtn.is_pressed():
+        volume = max(0, volume - 10)
+
+    os.system("amixer sset -q 'PCM' " + str(volume) + "%")
 
 
 def showCheat():
-    os.system(pngviewPath + "/pngview -b 0 -l 999999 " + iconPath + "/cheat.png &")
-    time.sleep(5)
-    killPngview()
+    os.system(pngviewBinary + " -b 0 -l 999999 -t 5000 " + iconPath + "/cheat.png &")
 
 
 def killPngview():
-    os.system("sudo killall -q -15 pngview")
+    os.system("sudo killall -q -15 pngview-transient")
 
 
 def initSetup():
+    global state
+    # Initial File Setup
+    try:
+        with open(toggleFile, 'r') as f:
+            output = f.read()
+    except IOError:
+        with open(toggleFile, 'w') as f:
+            f.write('1')
+        output = '1'
+    state = int(output)
+
     os.system("amixer sset -q 'PCM' " + str(volume) + "%")
     os.system("sudo rfkill block wifi")
     os.system("sudo rfkill block bluetooth")
@@ -171,15 +172,7 @@ def check_function():
 
 
 def main():
-    # Initial File Setup
-    try:
-        with open(toggleFile, 'r') as f:
-            output = f.read()
-    except IOError:
-        with open(toggleFile, 'w') as f:
-            f.write('1')
-        output = '1'
-    state = int(output)
+
     initSetup()
 
     while True:

@@ -13,8 +13,8 @@ port = 0
 debug = 0
 iconState = ""
 toggleFile = "/home/pi/gbzbatterymonitor/Toggle.txt"
-PNGVIEWPATH = "/home/pi/gbzbatterymonitor/raspidmx/pngview"
-ICONPATH = "/home/pi/gbzbatterymonitor/icons"
+pngviewBinary = "/home/pi/gbzbatterymonitor/bin/pngview"
+iconPath = "/home/pi/gbzbatterymonitor/icons"
 CLIPS = 1
 REFRESH_RATE = 1
 VCC = 5.1
@@ -31,7 +31,7 @@ def changeicon(percent):
         iconState = percent
         i = 0
         killid = 0
-        os.system(PNGVIEWPATH + "/pngview -b 0 -l 3000" + percent + " -x 650 -y 0 " + ICONPATH + "/battery" + percent + ".png &")
+        os.system(pngviewBinary + " -b 0 -l 3000" + percent + " -x 650 -y 0 " + iconPath + "/battery" + percent + ".png &")
         out = check_output("ps aux | grep pngview | awk '{ print $2 }'", shell=True)
         nums = out.split('\n')
         for num in nums:
@@ -82,8 +82,8 @@ while port == 0:
 
 # Begin Battery Monitoring
 
-os.system(PNGVIEWPATH + "/pngview -b 0 -l 299999 -x 650 -y 0 " + ICONPATH + "/blank.png &")
-
+os.system(pngviewBinary + " -b 0 -l 299999 -x 650 -y 0 " + iconPath + "/blank.png &")
+print(pngviewBinary + " -b 0 -l 299999 -x 650 -y 0 " + iconPath + "/blank.png &")
 try:
     with open(toggleFile, 'r') as f:
         output = f.read()
@@ -107,7 +107,7 @@ while True:
             if status != 0:
                 changeicon("0")
                 if CLIPS == 1:
-                    os.system("/usr/bin/omxplayer --no-osd --layer 999999  " + ICONPATH + "/lowbattshutdown.mp4 --alpha 160;")
+                    os.system("/usr/bin/omxplayer --no-osd --layer 999999  " + iconPath + "/lowbattshutdown.mp4 --alpha 160;")
                     voltcheck = convertVoltage()
                     if voltcheck <= VOLT0:
                         os.system("sudo shutdown -h now")
@@ -119,7 +119,7 @@ while True:
                 changeicon("25")
                 if warning != 1:
                     if CLIPS == 1:
-                        os.system("/usr/bin/omxplayer --no-osd --layer 999999  " + ICONPATH + "/lowbattalert.mp4 --alpha 160")
+                        os.system("/usr/bin/omxplayer --no-osd --layer 999999  " + iconPath + "/lowbattalert.mp4 --alpha 160")
                     warning = 1
             status = 25
         elif ret < VOLT50:
