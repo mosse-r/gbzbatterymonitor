@@ -13,7 +13,7 @@ port = 0
 debug = 0
 iconState = ""
 toggleFile = "/home/pi/gbzbatterymonitor/Toggle.txt"
-pngviewBinary = "/home/pi/gbzbatterymonitor/bin/pngview"
+pngviewBinary = "/home/pi/gbzbatterymonitor/bin/pngview-battery"
 iconPath = "/home/pi/gbzbatterymonitor/icons"
 CLIPS = 1
 REFRESH_RATE = 1
@@ -32,7 +32,7 @@ def changeicon(percent):
         i = 0
         killid = 0
         os.system(pngviewBinary + " -b 0 -l 3000" + percent + " -x 650 -y 0 " + iconPath + "/battery" + percent + ".png &")
-        out = check_output("ps aux | grep pngview | awk '{ print $2 }'", shell=True)
+        out = check_output("ps aux | grep pngview-battery | awk '{ print $2 }'", shell=True)
         nums = out.split('\n')
         for num in nums:
             i += 1
@@ -42,7 +42,7 @@ def changeicon(percent):
 
 
 def endProcess(signalnum=None, handler=None):
-    os.system("sudo killall pngview")
+    os.system("sudo killall pngview-battery")
     exit(0)
 
 
