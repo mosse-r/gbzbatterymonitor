@@ -3,7 +3,7 @@
 cd ~
 
 # Install dependancies
-sudo apt-get install libpng-dev python-gpiozero python-pkg-resources python3-pkg-resources python-serial -y
+sudo apt-get install libpng-dev python-pkg-resources python3-pkg-resources python-serial -y
 
 # Install gbzbatterymonitor
 git clone https://github.com/mosse-r/gbzbatterymonitor.git

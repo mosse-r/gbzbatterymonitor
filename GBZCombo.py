@@ -23,7 +23,6 @@ from subprocess import check_call
 import os
 import time
 
-
 """
 ----------------------
 SET BUTTON INPUTS HERE
@@ -101,9 +100,9 @@ def bluetoothToggle():
         bluetoothStatus = 1
     else:
         os.system("sudo rfkill unblock bluetooth")
-    	os.system("{pngviewBinary}-bluetooth -b 0 -l 299999 -x 635 -y 0 {iconPath}/bluetooth-notification.png &".format(
-		pngviewBinary=pngviewBaseBinary, delay=delay, iconPath=iconPath)
-    	)
+        os.system("{pngviewBinary}-bluetooth -b 0 -l 299999 -x 635 -y 0 {iconPath}/bluetooth-notification.png &".format(
+            pngviewBinary=pngviewBaseBinary, delay=delay, iconPath=iconPath)
+        )
         bluetoothStatus = 0
 
 
@@ -193,7 +192,6 @@ def check_function():
 
 
 def main():
-
     initSetup()
 
     while True:
