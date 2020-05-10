@@ -23,14 +23,35 @@ from subprocess import check_call
 import os
 import time
 
+
+"""
+----------------------
+SET BUTTON INPUTS HERE
+----------------------
+
+Run:
+
+	python ButtonTester.py
+
+To get the keycodes for your controller
+
+"""
+
 functionBtn = Button('BTN_WEST')
-volumeUpBtn = Button('BTN_SELECT')
-volumeDownBtn = Button('BTN_START')
+volumeUpBtn = Button('BTN_START')
+volumeDownBtn = Button('BTN_MODE')
 shutdownBtn = Button('BTN_NORTH')
 monitorBtn = Button('BTN_EAST')
 wifiBtn = Button('BTN_C')
 bluetoothBtn = Button('BTN_SOUTH')
-cheatBtn = Button('BTN_TL2')
+cheatBtn = Button('BTN_TR2')
+
+"""
+-----------------
+END BUTTON INPUTS
+-----------------
+"""
+
 volume = 60
 wifiStatus = 1
 bluetoothStatus = 1
